@@ -2,6 +2,8 @@
 
 Author: Chris Davis
 
+Private GitHub: https://github.com/defbyte/rssScraper
+
 ## Setup
 
 ### Installation
