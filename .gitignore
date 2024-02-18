@@ -1,0 +1,23 @@
+# Ignore local .env files
+.env
+
+# Ignore the virtualenv
+.venv
+
+# Ignore pythong cache stuff
+__pycache__
+.pytest_cache
+
+# OS generated files
+.DS_Store?
+*.DS_Store
+ehthumbs.db
+Thumbs.db
+*Thumbs.db
+
+# Included files
+# Specifically expect these files in projects
+!.gitignore
+!.python-version
+!*.gitkeep
+!*.keep

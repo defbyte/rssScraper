@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=scrappy
+      - POSTGRES_PASSWORD=scrappy
+      - POSTGRES_DB=scrappy
+    ports:
+      - "5432:5432"
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  app:
+    build:
+      context: .
+    environment:
+      - DATABASE_URL=postgres://scrappy:scrappy@db:5432/scrappy
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=django-db
+      - PORT=8000
+    depends_on:
+      - db
+      - redis
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - static_data:/vol/web
+  nginx:
+    build:
+      context: ./ngnix
+    volumes:
+      - static_data:/vol/static
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+volumes:
+  static_data:
