@@ -26,7 +26,7 @@ Before proceeding, it is wise to go ahead and create a user for the application.
 ```
 # from project root and activated virtualenv
 cd src/
-python manage createsuperuser
+python manage.py createsuperuser
 ```
 
 ### Run via Docker
@@ -67,7 +67,7 @@ docker-compose up db
 source .venv/bin/activate
 cd src/
 # Before you first try to start celery or runserver in development mode:
-python manage migrate
+python manage.py migrate
 # I keep it running to watch
 celery -A scrappy worker --beat -l info
 ```
@@ -80,8 +80,8 @@ From project root
 source .venv/bin/activate
 cd src/
 # Before you first try to start celery or runserver in development mode:
-python manage migrate
-python manage runserver 0.0.0.0:8000
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
 ```
 
 ### Running Tests
