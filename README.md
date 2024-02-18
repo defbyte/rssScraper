@@ -37,6 +37,14 @@ To run the app and all services via `docker-compose`
 docker-compose up
 ```
 
+This will start up the services required:
+* Postgres database
+* Application server (Django app, Celery & Celery Beat)
+* Redis
+* Ngninx
+
+Celery & Celery Beat are used to handle the schduled task of updating RSS feeds in the background. Redis plays the role of message broker.
+
 If changes are made to the application code you'll need to flag to rebuild containers:
 
 ```
