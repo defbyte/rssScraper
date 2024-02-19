@@ -108,6 +108,8 @@ pytest
 
 This API requires user authentication as feeds are managed per user.
 
+✨ **Swagger docs are available** for this project at `/swagger/` in your browser ✨
+
 ### 🗝 Authentication
 
 #### POST /api/token-auth/

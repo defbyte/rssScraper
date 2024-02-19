@@ -16,13 +16,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
+from rest_framework import permissions, routers
 from rest_framework.authtoken.views import obtain_auth_token
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
 router = routers.DefaultRouter()
 
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Scrappy API",
+      default_version='v1',
+      description="RSS Feed Scraper",
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/token-auth/', obtain_auth_token),
     path('api/', include('scrappy.feeds.urls')),
