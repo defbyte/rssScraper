@@ -56,7 +56,7 @@ def fetch_feed(url, feed_id):
             FeedItem.objects.update_or_create(
                 url=item.link, feed_id=feed.id, defaults={
                     'title': item.title,
-                    'description': item.summary,
+                    'description': getattr(item, 'description', ''),
                     # TODO: can we preserve timezones? I don't like this..
                     'published': datetime.fromtimestamp(mktime(item.published_parsed)),
                     'updated': datetime.fromtimestamp(mktime(item.updated_parsed)),
